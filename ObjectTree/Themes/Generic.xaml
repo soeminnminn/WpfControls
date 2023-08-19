@@ -1,0 +1,522 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:ObjectTree"
+                    xmlns:data="clr-namespace:ObjectTree.Models" >
+    
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+
+    <SolidColorBrush x:Key="MouseOverBackground" Color="#EBF4FD" />
+    <SolidColorBrush x:Key="MouseOverBorder" Color="#B8D6FB" />
+
+    <SolidColorBrush x:Key="HighlightBackground" Color="#FFDDDDDD" />
+    <SolidColorBrush x:Key="InactiveHighlightBackground" Color="#F6F6F6" />
+
+    <SolidColorBrush x:Key="SelectedBackground" Color="#C1DBFC" />
+    <SolidColorBrush x:Key="SelectedBorder" Color="#26A0DA" />
+
+    <SolidColorBrush x:Key="InactiveTextBrush" Color="{x:Static SystemColors.GrayTextColor}" />
+    <SolidColorBrush x:Key="InactiveBackgroundBrush" Color="{x:Static SystemColors.ControlColor}" />
+    <SolidColorBrush x:Key="InactiveBorderBrush" Color="{x:Static SystemColors.InactiveBorderColor}" />
+    <SolidColorBrush x:Key="WindowBrush" Color="{x:Static SystemColors.WindowColor}" />
+    <SolidColorBrush x:Key="ControlTextBrush" Color="{x:Static SystemColors.ControlTextColor}" />
+    <SolidColorBrush x:Key="ControlBrush" Color="{x:Static SystemColors.ControlColor}" />
+    <SolidColorBrush x:Key="SolidBorderBrush" Color="{x:Static SystemColors.ControlColor}" />
+
+    <SolidColorBrush x:Key="BlueBrush" Color="{x:Static Colors.Blue}" />
+    <SolidColorBrush x:Key="PurpleBrush" Color="{x:Static Colors.Purple}" />
+    <SolidColorBrush x:Key="DarkRedBrush" Color="{x:Static Colors.DarkRed}" />
+    <SolidColorBrush x:Key="GrayBrush" Color="{x:Static Colors.Gray}" />
+    <SolidColorBrush x:Key="GreenBrush" Color="{x:Static Colors.Green}" />
+
+    <local:ItemTemplateSelector x:Key="itemTemplateSelector" />
+
+    <DrawingImage x:Key="IconArray">
+        <DrawingImage.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Brush="#FFF6F6F6" Geometry="F1 M16,16z M0,0z M7,15L7,11 5,11 5,5 7,5 7,1 1,1 1,15 7,15z M9,15L9,11 11,11 11,5 9,5 9,1 15,1 15,15 9,15z" />
+                    <GeometryDrawing Brush="#FF424242" Geometry="F1 M16,16z M0,0z M6,4L6,2 2,2 2,14 6,14 6,12 4,12 4,4 6,4z M10,2L10,4 12,4 12,12 10,12 10,14 14,14 14,2 10,2z" />
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+
+    <DrawingImage x:Key="IconObject">
+        <DrawingImage.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Brush="#FFF6F6F6" Geometry="F1 M16,16z M0,0z M16,7.38L16,9.638C16,9.638 15.008,9.637 15.003,9.635 14.991,9.687 15,9.775 15,9.916L15,11.495C15,12.766 14.63,13.68 13.946,14.241 13.308,14.763 12.37,15 11.124,15L10,15 10,11.753C10,11.753 11.014,11.752 11.037,11.75 11.041,11.704 11,11.633 11,11.536L11,10.08C11,9.137 11.222,8.474 11.539,8.008 11.223,7.527 11,6.843 11,5.869L11,4.468C11,4.381 11.102,4.182 11.094,4.143 11.074,4.141 11.157,4 11.124,4L10,4 10,1 11.124,1C12.375,1 13.317,1.265 13.956,1.81 14.633,2.387 15,3.3 15,4.522L15,6 15.919,6 16,7.38z M1,7.38L1,9.638C1,9.638 1.992,9.637 1.997,9.635 2.009,9.687 2,9.775 2,9.916L2,11.495C2,12.766 2.37,13.68 3.054,14.241 3.692,14.763 4.63,15 5.876,15L7,15 7,11.753C7,11.753 5.986,11.752 5.963,11.75 5.959,11.704 6,11.633 6,11.536L6,10.08C6,9.137 5.778,8.474 5.461,8.008 5.777,7.527 6,6.843 6,5.869L6,4.468C6,4.381 5.898,4.182 5.906,4.143 5.926,4.141 5.843,4 5.876,4L7,4 7,1 5.876,1C4.625,1 3.683,1.265 3.044,1.81 2.367,2.387 2,3.3 2,4.522L2,6 1.081,6 1,7.38z" />
+                    <GeometryDrawing Brush="#FF424242" Geometry="F1 M16,16z M0,0z M15,7.38L15,8.638C14.303,8.638,13.954,9.064,13.954,9.916L13.954,11.495C13.954,12.456 13.731,13.12 13.288,13.484 12.843,13.848 12.122,14.031 11.124,14.031L11.124,12.753C11.507,12.753 11.785,12.661 11.958,12.476 12.131,12.291 12.218,11.978 12.218,11.536L12.218,10.08C12.218,8.991,12.567,8.309,13.264,8.036L13.264,8.009C12.567,7.722,12.218,7.009,12.218,5.869L12.218,4.468C12.218,3.675,11.854,3.279,11.124,3.279L11.124,2C12.117,2 12.838,2.19 13.284,2.571 13.73,2.952 13.954,3.602 13.954,4.523L13.954,6.088C13.954,6.949,14.303,7.38,15,7.38z M2.12401,8.638L2.12401,7.38C2.82101,7.38,3.17001,6.949,3.17001,6.088L3.17001,4.523C3.17001,3.602 3.39401,2.952 3.84001,2.571 4.28601,2.19 5.00701,2 6.00001,2L6.00001,3.279C5.27001,3.279,4.90601,3.675,4.90601,4.468L4.90601,5.869C4.90601,7.009,4.55701,7.722,3.86001,8.009L3.86001,8.036C4.55701,8.309,4.90601,8.991,4.90601,10.08L4.90601,11.536C4.90601,11.978 4.99301,12.291 5.16601,12.476 5.33901,12.661 5.61701,12.753 6.00001,12.753L6.00001,14.031C5.00201,14.031 4.28101,13.848 3.83601,13.484 3.39301,13.12 3.17001,12.456 3.17001,11.495L3.17001,9.916C3.17001,9.064,2.82101,8.638,2.12401,8.638z" />
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+
+    <DrawingImage x:Key="IconObjectRef">
+        <DrawingImage.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Brush="#FFF6F6F6" Geometry="F1 M16,16z M0,0z M16,7L16,5 15,4 15,3C15,1.29,13.969,0.021,12,0L11,0 11,3 12,3 12,4C12,4.535 12.741,5.612 13,6 12.741,6.389 12,7.466 12,8L12,9 11,9 11,12 12,12C13.969,11.979,15,10.723,15,9L15,8 16,7z M9,16L0,16 0,7 4,7 4,5 5,4 5,3C5,1.29,6.317,0.021,8.286,0L9,0 9,3 8,3 8,4C8,4.535 7.259,5.612 7,6 7.13559,6.20365 7.40328,6.59586 7.6276,7L9,7 9,16z" />
+                    <GeometryDrawing Brush="#FF424242" Geometry="F0 M16,16z M0,0z M6,6C6.29944,6.15982,6.59606,6.54167,6.7875,7L5,7 5,5 5.00605,4.99964C5.33041,4.98054,6,4.94111,6,4L6,3C6,2.96959 5.99989,2.93874 5.99978,2.90751 5.99683,2.08252 5.99295,1 8,1L8,2C7.167,2,7,3,7,3L7,4C7,4.834,6.504,5.736,6,6z M14,9L14,8C14,7.06073 14.6605,7.02064 14.9715,7.00176 14.9814,7.00116 14.9909,7.00058 15,7L15,5 14.9939,4.99964C14.6696,4.98054,14,4.94111,14,4L14,3C14,2.96959 14.0001,2.93874 14.0002,2.90751 14.0032,2.08252 14.007,1 12,1L12,2C12.833,2,13,3,13,3L13,4C13,4.834 13.496,5.736 14,6 13.496,6.269 13,7.167 13,8L13,9C13,9.84,12.416,10,12,10L12,11C14.007,11 14.0032,9.91748 14.0002,9.09248 14.0001,9.06126 14,9.03041 14,9z M6,13L6,10 3,10 3,11 4.293,11 2.647,12.646 3.354,13.353 5,11.707 5,13 6,13z M1,15L8,15 8,8 1,8 1,15z M7,14L2,14 2,9 7,9 7,14z" />
+                    <GeometryDrawing Brush="#FFF0EFF1" Geometry="F1 M16,16z M0,0z M2,9L2,14 7,14 7,9 2,9z M6,13L5,13 5,11.707 3.354,13.353 2.647,12.646 4.293,11 3,11 3,10 6,10 6,13z" />
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+
+    <DrawingImage x:Key="IconField">
+        <DrawingImage.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Brush="#00FFFFFF" Geometry="F1M16,16L0,16 0,0 16,0z" />
+                    <GeometryDrawing Brush="#FFF6F6F6" Geometry="F1M9,-0.0002L0,4.4998 0,10.7358 7,14.2358 16,9.7358 16,3.4998z" />
+                    <GeometryDrawing Brush="#FF00529C" Geometry="F1M7,6.8818L3.236,4.9998 9,2.1178 12.764,3.9998z M9,0.9998L1,4.9998 1,9.9998 7,12.9998 15,8.9998 15,3.9998z" />
+                    <GeometryDrawing Brush="#FFEFEFF0" Geometry="F1M9,2.1182L12.764,4.0002 7,6.8822 3.236,5.0002z" />
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+
+    <DrawingImage x:Key="IconProperty">
+        <DrawingImage.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Brush="#00FFFFFF" Geometry="F1M16,16L0,16 0,0 16,0z" />
+                    <GeometryDrawing Brush="#FFF6F6F6" Geometry="F1M16,5.5C16,8.538 13.538,11 10.5,11 10.225,11 9.957,10.973 9.693,10.934 9.667,10.93 9.641,10.927 9.615,10.922 9.337,10.877 9.066,10.816 8.804,10.731L4.268,15.268C3.795,15.74 3.167,16 2.5,16 1.833,16 1.205,15.74 0.732,15.268 -0.242,14.293 -0.242,12.707 0.732,11.732L5.269,7.196C5.184,6.934 5.123,6.662 5.078,6.384 5.073,6.359 5.07,6.333 5.066,6.307 5.027,6.043 5,5.775 5,5.5 5,2.462 7.462,0 10.5,0 13.538,0 16,2.462 16,5.5" />
+                    <GeometryDrawing Brush="#FF424242" Geometry="F1M15,5.5C15,7.985 12.985,10 10.5,10 9.807,10 9.158,9.83 8.571,9.55L3.561,14.561C3.268,14.854 2.884,15 2.5,15 2.116,15 1.732,14.854 1.439,14.561 0.854,13.975 0.854,13.025 1.439,12.439L6.45,7.429C6.17,6.842 6,6.193 6,5.5 6,3.015 8.015,1 10.5,1 11.193,1 11.842,1.17 12.429,1.45L9.636,4.243 11.757,6.364 14.55,3.571C14.83,4.158,15,4.807,15,5.5" />
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+
+    <Style x:Key="ExpandCollapseToggleStyle" TargetType="{x:Type ToggleButton}">
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Width" Value="16" />
+        <Setter Property="Height" Value="16" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Border Width="16" Height="16" Background="Transparent" Padding="5,5,5,5">
+                        <Path x:Name="ExpandPath" Fill="Transparent" Stroke="#FF989898"
+                              Data="M0,0 L0,6 L6,0 L0,0">
+                            <Path.RenderTransform>
+                                <RotateTransform Angle="135" CenterX="3" CenterY="3" />
+                            </Path.RenderTransform>
+                        </Path>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="ExpandPath" Property="Stroke" Value="#FF1BBBFA" />
+                            <Setter TargetName="ExpandPath" Property="Fill" Value="Transparent" />
+                        </Trigger>
+
+                        <Trigger Property="IsChecked" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation From="135" To="180" Duration="0:0:0.25"
+                                            Storyboard.TargetName="ExpandPath"
+                                            Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(RotateTransform.Angle)" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation From="180" To="135" Duration="0:0:0.25"
+                                            Storyboard.TargetName="ExpandPath"
+                                            Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(RotateTransform.Angle)" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                            <Setter TargetName="ExpandPath" Property="Fill" Value="#FF595959" />
+                            <Setter TargetName="ExpandPath" Property="Stroke" Value="#FF262626" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ItemImageStyle" TargetType="{x:Type Image}">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Height" Value="16" />
+        <Setter Property="Width" Value="16" />
+    </Style>
+
+    <Style x:Key="TextNameStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+        <Setter Property="MaxWidth" Value="1024" />
+        <Setter Property="Foreground" Value="{StaticResource BlueBrush}" />
+        <Setter Property="Margin" Value="4,0,0,0" />
+    </Style>
+
+    <Style x:Key="TextValueStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+        <Setter Property="MaxWidth" Value="1024" />
+        <Setter Property="Margin" Value="6,0,0,0" />
+    </Style>
+
+    <Style x:Key="TextPathRefStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Foreground" Value="{StaticResource PurpleBrush}" />
+        <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+        <Setter Property="Margin" Value="6,0,0,0" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="TextBlock.TextDecorations" Value="Underline" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="TextBoxStyle" TargetType="{x:Type TextBox}">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="IsReadOnly" Value="True" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="MaxLines" Value="1" />
+        <Setter Property="MaxWidth" Value="1024" />
+    </Style>
+
+    <Style x:Key="GridSplitterStyle" TargetType="{x:Type GridSplitter}">
+        <Setter Property="Height" Value="Auto" />
+        <Setter Property="Width" Value="5" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Background" Value="Transparent" />
+    </Style>
+
+    <DataTemplate x:Key="{DataTemplateKey {x:Type data:MemberNode}}" DataType="{x:Type data:MemberNode}">
+        <Grid VerticalAlignment="Stretch" Margin="0,-2,0,-2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{Binding SplitPosition, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ObjectTreeView}}}" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal" >
+                <Image Source="{StaticResource IconField}" Style="{StaticResource ItemImageStyle}"/>
+                <TextBlock Text="{Binding Name, StringFormat={}{0} :, Mode=OneTime}" Style="{StaticResource TextNameStyle}" />
+            </StackPanel>
+
+            <Border Grid.Column="1" BorderBrush="{StaticResource SolidBorderBrush}" BorderThickness="1,0,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                    Margin="{Binding ValuePadding, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ObjectTreeViewItem}}}">
+
+                <TextBlock Text="{Binding Text, Mode=OneTime}" Foreground="{StaticResource ControlTextBrush}" Style="{StaticResource TextValueStyle}"/>
+            </Border>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="OtTemplateObjectRef" DataType="{x:Type data:MemberNode}">
+        <Grid VerticalAlignment="Stretch" Margin="0,-2,0,-2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{Binding SplitPosition, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ObjectTreeView}}}" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal" >
+                <Image Source="{StaticResource IconObjectRef}" Style="{StaticResource ItemImageStyle}" />
+                <TextBlock Text="{Binding Name, StringFormat={}{0} :, Mode=OneTime}" Style="{StaticResource TextNameStyle}" />
+            </StackPanel>
+
+            <Border Grid.Column="1" BorderBrush="{StaticResource SolidBorderBrush}" BorderThickness="1,0,0,0"
+                    VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                    Margin="{Binding ValuePadding, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ObjectTreeViewItem}}}">
+
+                <TextBlock Text="{Binding Path=PathRef, Mode=OneTime}" Style="{StaticResource TextPathRefStyle}">
+                    <TextBlock.InputBindings>
+                        <MouseBinding Gesture="LeftClick" Command="{Binding ClickRefCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ObjectTreeViewItem}}}"/>
+                    </TextBlock.InputBindings>
+                </TextBlock>
+            </Border>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="OtTemplateNull" DataType="{x:Type data:MemberNode}">
+        <Grid VerticalAlignment="Stretch" Margin="0,-2,0,-2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{Binding SplitPosition, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ObjectTreeView}}}" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal" >
+                <Image Source="{StaticResource IconArray}" Style="{StaticResource ItemImageStyle}"
+                               Visibility="{Binding IsArray, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                <Image Source="{StaticResource IconObject}" Style="{StaticResource ItemImageStyle}"
+                               Visibility="{Binding IsObject, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                <Image Source="{StaticResource IconField}" Style="{StaticResource ItemImageStyle}"
+                               Visibility="{Binding IsField, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                <Image Source="{StaticResource IconProperty}" Style="{StaticResource ItemImageStyle}"
+                               Visibility="{Binding IsProperty, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+
+                <TextBlock Text="{Binding Name, StringFormat={}{0} :, Mode=OneTime}" Style="{StaticResource TextNameStyle}" />
+            </StackPanel>
+
+            <Border Grid.Column="1" BorderBrush="{StaticResource SolidBorderBrush}" BorderThickness="1,0,0,0"
+                    VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                    Margin="{Binding ValuePadding, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ObjectTreeViewItem}}}">
+
+                <TextBlock Text="{Binding Text, Mode=OneTime}" Foreground="{StaticResource GrayBrush}" Style="{StaticResource TextValueStyle}"/>
+            </Border>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="OtTemplatePrimitive" DataType="{x:Type data:MemberNode}">
+        <Grid VerticalAlignment="Stretch" Margin="0,-2,0,-2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{Binding SplitPosition, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ObjectTreeView}}}" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal" >
+                <Image Source="{StaticResource IconField}" Style="{StaticResource ItemImageStyle}"
+                               Visibility="{Binding IsField, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                <Image Source="{StaticResource IconProperty}" Style="{StaticResource ItemImageStyle}"
+                               Visibility="{Binding IsProperty, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+
+                <TextBlock Text="{Binding Name, StringFormat={}{0} :, Mode=OneTime}" Style="{StaticResource TextNameStyle}" />
+            </StackPanel>
+
+            <Border Grid.Column="1" BorderBrush="{StaticResource SolidBorderBrush}" BorderThickness="1,0,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                    Margin="{Binding ValuePadding, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ObjectTreeViewItem}}}">
+
+                <TextBlock Text="{Binding Text, Mode=OneTime}" Foreground="{StaticResource GreenBrush}" Style="{StaticResource TextValueStyle}"/>
+            </Border>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="OtTemplateString" DataType="{x:Type data:MemberNode}">
+        <Grid VerticalAlignment="Stretch" Margin="0,-2,0,-2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{Binding SplitPosition, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ObjectTreeView}}}" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal" >
+                <Image Source="{StaticResource IconField}" Style="{StaticResource ItemImageStyle}"
+                               Visibility="{Binding IsField, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                <Image Source="{StaticResource IconProperty}" Style="{StaticResource ItemImageStyle}"
+                               Visibility="{Binding IsProperty, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+
+                <TextBlock Text="{Binding Name, StringFormat={}{0} :, Mode=OneTime}" Style="{StaticResource TextNameStyle}" />
+            </StackPanel>
+
+            <Border Grid.Column="1" BorderBrush="{StaticResource SolidBorderBrush}" BorderThickness="1,0,0,0"
+                    VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                    Margin="{Binding ValuePadding, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ObjectTreeViewItem}}}">
+
+                <TextBlock Text="{Binding Text, StringFormat='&quot;{0}&quot;', Mode=OneTime}" Foreground="{StaticResource DarkRedBrush}" Style="{StaticResource TextValueStyle}"/>
+            </Border>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="OtTemplateEnum" DataType="{x:Type data:MemberNode}">
+        <Grid VerticalAlignment="Stretch" Margin="0,-2,0,-2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{Binding SplitPosition, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ObjectTreeView}}}" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal" >
+                <Image Source="{StaticResource IconField}" Style="{StaticResource ItemImageStyle}"
+                               Visibility="{Binding IsField, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                <Image Source="{StaticResource IconProperty}" Style="{StaticResource ItemImageStyle}"
+                               Visibility="{Binding IsProperty, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+
+                <TextBlock Text="{Binding Name, StringFormat={}{0} :, Mode=OneTime}" Style="{StaticResource TextNameStyle}" />
+            </StackPanel>
+
+            <Border Grid.Column="1" BorderBrush="{StaticResource SolidBorderBrush}" BorderThickness="1,0,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                    Margin="{Binding ValuePadding, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ObjectTreeViewItem}}}">
+
+                <TextBlock Text="{Binding Text, Mode=OneTime}" Foreground="{StaticResource DarkRedBrush}" Style="{StaticResource TextValueStyle}"/>
+            </Border>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="OtTemplateBlob" DataType="{x:Type data:MemberNode}">
+        <Grid VerticalAlignment="Stretch" Margin="0,-2,0,-2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{Binding SplitPosition, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ObjectTreeView}}}" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal" >
+                <Image Source="{StaticResource IconField}" Style="{StaticResource ItemImageStyle}"
+                               Visibility="{Binding IsField, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                <Image Source="{StaticResource IconProperty}" Style="{StaticResource ItemImageStyle}"
+                               Visibility="{Binding IsProperty, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+
+                <TextBlock Text="{Binding Name, StringFormat={}{0} :, Mode=OneTime}" Style="{StaticResource TextNameStyle}" />
+            </StackPanel>
+
+            <Border Grid.Column="1" BorderBrush="{StaticResource SolidBorderBrush}" BorderThickness="1,0,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                    Margin="{Binding ValuePadding, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ObjectTreeViewItem}}}">
+
+                <TextBlock Text="{Binding Text, StringFormat='base64:{0}', Mode=OneTime}" Foreground="{StaticResource DarkRedBrush}" Style="{StaticResource TextValueStyle}"/>
+            </Border>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="OtTemplateObject" DataType="{x:Type data:MemberNode}">
+        <Grid VerticalAlignment="Stretch" Margin="0,-2,0,-2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{Binding SplitPosition, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ObjectTreeView}}}" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal" >
+                <Image Source="{StaticResource IconObject}" Style="{StaticResource ItemImageStyle}" />
+
+                <TextBlock Text="{Binding Name, StringFormat={}{0} :, Mode=OneTime}" Style="{StaticResource TextNameStyle}" />
+            </StackPanel>
+
+            <Border Grid.Column="1" BorderBrush="{StaticResource SolidBorderBrush}" BorderThickness="1,0,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                    Margin="{Binding ValuePadding, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ObjectTreeViewItem}}}">
+
+                <TextBlock Text="{Binding Text, Mode=OneTime}" Foreground="{StaticResource GrayBrush}" Style="{StaticResource TextValueStyle}"/>
+            </Border>
+        </Grid>
+    </DataTemplate>
+    
+    <DataTemplate x:Key="OtTemplateArray" DataType="{x:Type data:MemberNode}">
+        <Grid VerticalAlignment="Stretch" Margin="0,-2,0,-2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{Binding SplitPosition, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ObjectTreeView}}}" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal" >
+                <Image Source="{StaticResource IconArray}" Style="{StaticResource ItemImageStyle}" />
+
+                <TextBlock Text="{Binding Name, StringFormat={}{0} :, Mode=OneTime}" Style="{StaticResource TextNameStyle}" />
+            </StackPanel>
+
+            <Border Grid.Column="1" BorderBrush="{StaticResource SolidBorderBrush}" BorderThickness="1,0,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                    Margin="{Binding ValuePadding, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ObjectTreeViewItem}}}">
+
+                <TextBlock Text="{Binding Text, StringFormat='[{0}]', Mode=OneTime}" Foreground="{StaticResource ControlTextBrush}" Style="{StaticResource TextValueStyle}"/>
+            </Border>
+        </Grid>
+    </DataTemplate>
+
+    <Style TargetType="{x:Type local:ObjectTreeView}" BasedOn="{StaticResource {x:Type ListBox}}">
+        <Setter Property="SelectionMode" Value="Single" />
+        <Setter Property="AllowDrop" Value="False" />
+        <Setter Property="ItemTemplateSelector" Value="{StaticResource itemTemplateSelector}" />
+
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:ObjectTreeView}">
+                    <Border x:Name="Wbd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid x:Name="PART_ItemsContainer">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="{Binding SplitPosition, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ObjectTreeView}}}"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            
+                            <ScrollViewer x:Name="PART_Scroller" Grid.ColumnSpan="3" CanContentScroll="True"
+                                          HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                          VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
+                                          Background="{TemplateBinding Panel.Background}"
+                                          Padding="{TemplateBinding Control.Padding}"
+                                          SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" 
+                                          Focusable="False">
+                                <ItemsPresenter x:Name="PART_Content" />
+                            </ScrollViewer>
+
+                            <GridSplitter x:Name="PART_Splitter" Grid.Column="1" Style="{StaticResource GridSplitterStyle}" />
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="UIElement.IsEnabled" Value="False">
+                            <Setter Property="Panel.Background" TargetName="Wbd" Value="{StaticResource ControlBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        
+        <Setter Property="ItemContainerStyle">
+            <Setter.Value>
+                <Style TargetType="{x:Type local:ObjectTreeViewItem}">
+                    <Setter Property="BorderThickness" Value="1" />
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type local:ObjectTreeViewItem}">
+                                <Border BorderThickness="0,0,0,1" BorderBrush="{StaticResource SolidBorderBrush}">
+                                    <Border x:Name="Bd" BorderThickness="1" SnapsToDevicePixels="true">
+                                        <Grid Margin="{Binding LevelPadding, RelativeSource={RelativeSource TemplatedParent}}">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+                                            <ToggleButton x:Name="Expander" Margin="0,0,8,0"
+                                                        Style="{StaticResource ExpandCollapseToggleStyle}" IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
+                                            <ContentPresenter Grid.Column="1">
+                                                <ContentPresenter.InputBindings>
+                                                    <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ToggleExpandCommand, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                                </ContentPresenter.InputBindings>
+                                            </ContentPresenter>
+                                        </Grid>
+
+                                        <Border.Style>
+                                            <Style TargetType="{x:Type Border}">
+                                                <Setter Property="Background" Value="Transparent" />
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="{StaticResource MouseOverBackground}" />
+                                                        <Setter Property="BorderBrush" Value="{StaticResource MouseOverBorder}" />
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Border.Style>
+                                    </Border>
+                                </Border>
+                                
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="HasItems" Value="false">
+                                        <Setter TargetName="Expander" Property="Visibility" Value="Hidden" />
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="true">
+                                        <Setter TargetName="Bd" Property="Background" Value="{StaticResource HighlightBackground}" />
+                                    </Trigger>
+                                    <MultiTrigger>
+                                        <MultiTrigger.Conditions>
+                                            <Condition Property="IsEnabled" Value="False" />
+                                            <Condition Property="IsSelected" Value="True" />
+                                        </MultiTrigger.Conditions>
+                                        <MultiTrigger.Setters>
+                                            <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource InactiveHighlightBackground}" />
+                                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource InactiveHighlightBackground}" />
+                                        </MultiTrigger.Setters>
+                                    </MultiTrigger>
+                                    <MultiTrigger>
+                                        <MultiTrigger.Conditions>
+                                            <Condition Property="IsSelected" Value="True" />
+                                            <Condition Property="Selector.IsSelectionActive" Value="True" />
+                                        </MultiTrigger.Conditions>
+                                        <Setter TargetName="Bd" Property="Background" Value="{StaticResource SelectedBackground}" />
+                                        <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource SelectedBorder}" />
+                                    </MultiTrigger>
+                                    <Trigger Property="IsEnabled" Value="false">
+                                        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

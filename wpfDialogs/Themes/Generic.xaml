@@ -1,0 +1,10 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/wpfDialogs;component/ColorDialog/ColorDialog.xaml" />
+        <ResourceDictionary Source="/wpfDialogs;component/FontDialog/FontDialog.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+</ResourceDictionary>

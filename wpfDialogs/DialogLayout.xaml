@@ -1,0 +1,69 @@
+﻿<Window x:Class="wpfDialogs.DialogLayout"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:wpfDialogs" 
+        d:DataContext="{d:DesignInstance Type=local:ColorDialogModel}"
+        mc:Ignorable="d"
+        WindowStyle="ToolWindow"
+        ResizeMode="NoResize"
+        SizeToContent="WidthAndHeight"
+        Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+        Title="Dialog">
+
+    <Window.Resources>
+        
+    </Window.Resources>
+
+    <Grid Margin="10,6,14,20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="160" />
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="200"/>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Label Content="_Font:" Target="{Binding ElementName=FontFamilyInput}" />
+        <local:FontFamilyList x:Name="FontFamilyInput" Grid.Row="1" Margin="4,0,4,0" />
+
+        <Label Content="Font st_yle:" Grid.Column="1" Target="{Binding ElementName=TypefaceInput}" />
+        <local:TypefaceList x:Name="TypefaceInput" Grid.Column="1" Grid.Row="1" Margin="4,0,4,0" />
+
+        <Label Content="_Size:" Grid.Column="2" Target="{Binding ElementName=FontSizeInput}" />
+        <local:FontSizeList x:Name="FontSizeInput" Grid.Column="2" Grid.Row="1" Margin="4,0,4,0"/>
+
+        <StackPanel Grid.Column="3" Grid.Row="1" Orientation="Vertical" Margin="4,0,0,0">
+            <Button Content="OK" Width="80" Height="24" IsDefault="True" Command="{Binding AcceptCommand}" />
+            <Button Content="Cancel" Width="80" Height="24" Margin="0,4,0,0" IsCancel="True" />
+        </StackPanel>
+
+        <GroupBox Grid.Row="2" Grid.RowSpan="2" Header="Effects" Margin="4,8,0,0">
+            <StackPanel Orientation="Vertical" Margin="8,10,0,0">
+                <CheckBox Content="Stri_keout" Margin="0,4,0,4" />
+                <CheckBox Content="_Underline" Margin="0,4,0,4"/>
+
+                <Label Content="Color:" Padding="0,4,0,2"/>
+                <ComboBox Margin="0,0,12,4" />
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" Header="Sample" Margin="4,8,0,0" Padding="0,8,0,8">
+            <TextBox Text="AaBbYyZz" Style="{x:Null}" IsReadOnly="True" Background="{x:Null}" BorderThickness="0" TextAlignment="Center" MinHeight="40" VerticalContentAlignment="Center" />
+        </GroupBox>
+
+        <StackPanel Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" Orientation="Vertical" Margin="4,8,0,0">
+            <Label Content="Sc_ript:" Target="{Binding ElementName=ScriptCombo}" />
+            <ComboBox x:Name="ScriptCombo" Margin="4,0,4,0" IsEnabled="False">
+                <ComboBoxItem Content="Western" IsSelected="True"/>
+            </ComboBox>
+        </StackPanel>
+    </Grid>
+</Window>

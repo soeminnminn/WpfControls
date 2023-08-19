@@ -1,0 +1,28 @@
+﻿<Window x:Class="WpfControlDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfControlDemo"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <TabControl>
+        
+        <TabItem Header="ObjectTree">
+            <Frame Source="Pages/ObjectTreePage.xaml" />
+        </TabItem>
+
+        <TabItem Header="GridControl">
+            <Frame Source="Pages/GridControlPage.xaml" />
+        </TabItem>
+
+        <TabItem Header="ColorPicker">
+            <Frame Source="Pages/ColorPickerPage.xaml" />
+        </TabItem>
+
+        <TabItem Header="Dialogs">
+            <Frame Source="Pages/DialogsPage.xaml" />
+        </TabItem>
+
+    </TabControl>
+</Window>

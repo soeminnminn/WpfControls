@@ -191,6 +191,10 @@ namespace wpfDialogs
             {
                 SelectedTypeface = selectedItem.Typeface;
             }
+            else if (typefaces.Count > 0)
+            {
+                SelectedTypeface = typefaces[0].Typeface;
+            }
         }
 
         private void OnSelectedTypefaceChanged(Typeface typeface)
